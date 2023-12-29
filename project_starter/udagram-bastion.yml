@@ -13,9 +13,8 @@ Parameters:
     Type: String
 
   S3BucketKeyName:
-    Description: S3Bucke where ssh key is hosted
+    Description: S3 Bucket where ssh key is hosted
     Type: String
-    Default: udagram-key-patryk
 
   ## You have to create a .pem file, and upload it to S3 bucket for KEY pairs.
   BastionSSHKey:
