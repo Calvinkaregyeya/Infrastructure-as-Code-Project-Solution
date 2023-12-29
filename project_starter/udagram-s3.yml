@@ -1,0 +1,92 @@
+Description: >
+  Calvin Karegyeya | Udacity IAC project 2023
+  AWS-CloudFormation script to create a S3 bucket for deploying a high-availability 
+  web-app.
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resource names.
+    Type: String
+    Default: UdagramApp
+
+  S3BucketName:
+    Description: Application archieve bucket.
+    Type: String
+
+  S3KeyPairBucketName:
+    Description: Application key pair bucket. To keep the pem keypair files for udagram server and bastion.
+    Type: String
+
+Resources:
+  S3WebAppArchive:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
+      PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Delete
+
+  S3WebAppPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3WebAppArchive
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Action: s3:*
+            Resource: !Join ['', ['arn:aws:s3:::', !Ref 'S3WebAppArchive', '/*']]
+            Principal:
+              AWS: '*'
+  
+  S3KeyPairBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3KeyPairBucketName
+      PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Delete
+
+  S3KeyPairBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3KeyPairBucket
+      PolicyDocument:
+        Statement:
+          - Sid: AllowStaticObjectDownload
+            Action: s3:GetObject
+            Effect: Allow
+            Resource: !Join ['', ['arn:aws:s3:::', !Ref 'S3KeyPairBucket', '/*']]
+            Principal:
+              AWS: '*'
+          - Sid: PutObjectAccess
+            Action: s3:PutObject
+            Effect: Allow
+            Resource: !Join ['', ['arn:aws:s3:::', !Ref 'S3KeyPairBucket', '/*']]
+            Principal:
+              AWS: '*'
+
+
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt [S3WebAppArchive, WebsiteURL]
+    Description: URL for website hosted on S3
+    Export:
+      Name: !Sub ${EnvironmentName}-S3-APP-URL
+
+  KeyBucketURL:
+    Value: !GetAtt [S3KeyPairBucket, WebsiteURL]
+    Description: URL for website hosted on S3
+    Export:
+      Name: !Sub ${EnvironmentName}-EC-KEYS-URL

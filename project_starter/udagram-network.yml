@@ -1,5 +1,5 @@
 Description: >
-    Calvin Karegyeya | Udacity project
+    Calvin Karegyeya | Udacity IAC project 2023
     AWS-Cloud formation script to create network infrastructure of the Udagram app.
     This template deploys a VPC, with a pair of public and private subnets spread 
     across two Availabilty Zones. It deploys an Internet Gateway, with a default 

@@ -1,0 +1,14 @@
+[
+{
+    "ParameterKey": "EnvironmentName",
+    "ParameterValue": "Udagram"
+},
+{
+    "ParameterKey": "S3BucketName",
+    "ParameterValue": "udagram-app-archive"
+},
+{
+    "ParameterKey": "S3KeyPairBucketName",
+    "ParameterValue": "udagramkeypairs"
+}
+]
