@@ -109,7 +109,7 @@ Resources:
           sudo rm /var/www/html/index.html
           sudo aws s3 cp s3://udagram-app-archive/udagram.zip /var/www/html
           sudo unzip /var/www/html/udagram.zip -d /var/www/html
-          echo "Udacity Demo Web Server Up and Running!" > /var/www/html/index.html
+          echo "it works! Udagram, Udacity" > /var/www/html/index.html
           systemctl restart apache2.service
       IamInstanceProfile:
         Fn::ImportValue: !Sub '${EnvironmentName}-IAM-NAME'
