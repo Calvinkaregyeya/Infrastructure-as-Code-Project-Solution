@@ -30,3 +30,11 @@ You can run the scripts in two easy steps:
 # Check the region in the update.sh file
 ./update.sh server servers.yml server-parameters.json
 ```
+
+### Order of execution of the scripts?
+
+1. udagram-network.yml
+2. udagram-iam.yml
+3. udagram-s3.yml
+4. udagram-bastion.yml
+5. udagram.yml
