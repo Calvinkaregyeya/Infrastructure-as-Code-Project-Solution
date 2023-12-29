@@ -1,30 +1,32 @@
-## ND9991 - C2- Infrastructure as Code - Supporting Material and Starter Code
-This folder provides the supporting material and starter code for the "ND9991 - C2- Infrastructure as Code" course. This folder contains the following folders:
-1. project_starter - It contains the starter code.
-2. supporting_material - It contains the essential files (.yml, .json, .bat, .sh, and .jpeg) that were referred in the different lessons of this course.
+## Udacity project | Deploy a high-availability web app using CloudFormation
 
-In addition to the current repo, there is one more repository, [nd9991-c2-Infrastructure-as-Code-v1-Exercises_Solution](https://github.com/udacity/nd9991-c2-Infrastructure-as-Code-v1-Exercises_Solution) that contains the solution to the exercises and video demos.  
+This repository contains my solution to the Udacity project of module 2 of the course Cloud dev ops Engineer. It involves creating AWS resources such as:
 
-### Dependencies
-##### 1. AWS account
-You would require to have an AWS account to be able to build cloud infrastructure.
+1. networking infrastructure : THese include VPCs, subnets Elastic IPs, gateways, RouteTable etc
+2. Servers and Server groups: THese include Secucrity groups, Autoscaling groups, launch configurations, Target groups, Listeners, Loadbalances etc.
+3. Other resources: These include IAM roles, S3 buckets
 
-##### 2. VS code editor
-An editor would be helpful to visualize the image as well as code. Download the VS Code editor [here](https://code.visualstudio.com/download).
+### Requirements
 
-##### 3. An account on www.lucidchart.com
-A free user-account on [www.lucidchart.com](www.lucidchart.com) is required to be able to draw the web app architecture diagrams for AWS.
+##### 1. Creating SSH key pairs in AWS account.
 
+You would require to create ssh keys in the aws account that will be used to access the EC2 instances that are created in both the private and public subnets.
 
-### How to run the supporting material?
-You can run the supporting material in two easy steps:
+##### 2. Copy the Key pairs to the specified bucket.
+
+After creating and downloading the key pairs. You will have to add them the the S3 bucket **udagramkeypairs**. Feel free to change the name of bucket and keys if you wish. The keys are attached to EC2 instances on creation and also used in the bastion host to connect to the instances that are in private subnets.
+
+### How to run the cloud formation scripts in this project?
+
+You can run the scripts in two easy steps:
+
 ```bash
 # Ensure that the AWS CLI is configured before runniing the command below
 # Create the network infrastructure
 # Check the region in the create.sh file
-./create.sh myFirstStack network.yml network-parameters.json
+./create.sh network udagram-network.yml parameters/udagram-network.json
 # Create servers
 # Change the AMI ID and key-pair name in the servers.yml
 # Check the region in the update.sh file
-./update.sh mySecStack servers.yml server-parameters.json
+./update.sh server servers.yml server-parameters.json
 ```
