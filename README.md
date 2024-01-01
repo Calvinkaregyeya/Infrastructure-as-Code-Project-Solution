@@ -10,7 +10,7 @@ This repository contains my solution to the Udacity project of module 2 of the c
 
 ##### 1. Creating SSH key pairs in AWS account.
 
-You would require to create ssh keys in the aws account that will be used to access the EC2 instances that are created in both the private and public subnets.
+You would require to create ssh keys in the aws account that will be used to access the EC2 instances that are created in both the private and public subnets. The ssh keys should be named udagram.pem and udagram-bastion.pem
 
 ##### 2. Copy the Key pairs to the specified bucket.
 
@@ -33,8 +33,8 @@ You can run the scripts in two easy steps:
 
 ### Order of execution of the scripts?
 
-1. udagram-network.yml
-2. udagram-iam.yml
-3. udagram-s3.yml
-4. udagram-bastion.yml
-5. udagram.yml
+1. udagram-network.yml (./create.sh network udagram-iam.yml parameters/udagram-iam.json )
+2. udagram-iam.yml (./create.sh IAMRole udagram-iam.yml parameters/udagram-iam.json)
+3. udagram-s3.yml (./create.sh S3bucket udagram-s3.yml parameters/udagram-s3.json )
+4. udagram-bastion.yml (./create.sh bastion udagram-bastion.yml parameters/udagram-bastion.json)
+5. udagram.yml (./create.sh udagramApp udagram.yml parameters/udagram.json )
