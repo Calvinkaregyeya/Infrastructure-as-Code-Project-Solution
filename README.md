@@ -37,4 +37,10 @@ You can run the scripts in two easy steps:
 2. udagram-iam.yml (./create.sh IAMRole udagram-iam.yml parameters/udagram-iam.json)
 3. udagram-s3.yml (./create.sh S3bucket udagram-s3.yml parameters/udagram-s3.json )
 4. udagram-bastion.yml (./create.sh bastion udagram-bastion.yml parameters/udagram-bastion.json)
-5. udagram.yml (./create.sh udagramApp udagram.yml parameters/udagram.json )
+5. udagram.yml (./create.sh udagramApp udagram.yml parameters/udagram.json)
+
+### Website link:
+
+```bash
+http://udagram-1105007005.us-west-2.elb.amazonaws.com
+```
